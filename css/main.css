@@ -1,0 +1,218 @@
+:root {
+    --sel: #6bff3d;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+div, p, a, img, form, button {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, ul li {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
+    min-height: 600px;
+    background: #000;
+}
+
+
+@media screen and (min-width: 1400px) {
+    .container {
+        width: 1140px;
+    }
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    margin-top: 42px;
+}
+
+.menu {
+    display: flex;
+    margin-left: 20px;
+}
+
+.menu li {
+    font-size: 12px;
+    margin-right: 25px;
+}
+
+.menu li a {
+    color: #fff;
+    padding: 12px 0;
+}
+
+.menu li.active a {
+    color: var(--sel);
+    border-top: 1px solid var(--sel);
+    border-bottom: 1px solid var(--sel);
+}
+
+.menu li a:hover {
+    color: var(--sel);
+}
+
+.right {
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.desc {
+    margin-top: 100px;
+}
+
+.desc .sect {
+    margin-top: 30px;
+    text-align: justify;
+}
+
+.desc .sect h1 {
+    font-size: 37px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.desc .sect p {
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.desc .sect .resContainer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.desc .sect .resContainer .res {
+    width: 250px;
+    height: 300px;
+    border: 1px solid red;
+}
+
+.desc .sect .resContainer .res-vk {
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+    background: #124c8f;
+    transition: 0.3s;
+    color: white;
+}
+
+.desc .sect .resContainer .res-vk:hover {
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+    background: #0b315c;
+    cursor: pointer;
+}
+
+.desc .sect .resContainer .res-yt {
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+    background: #8d0808;
+    transition: 0.3s;
+    color: white;
+}
+
+.desc .sect .resContainer .res-yt:hover {
+    background: #5f0505;
+    cursor: pointer;
+}
+
+.desc .sect .resContainer h3 {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 95px;
+}
+
+.instagram {
+    color: #bc2a8d;
+    cursor: pointer;
+}
+
+.faq-list {
+    font-size: 22px;
+}
+
+.faq-list p {
+    font-size: 16px;
+}
+
+.services {
+    display:none;
+    width:300px;
+    border: 1px solid #1c1c1c;
+    position: absolute;
+    margin-top: 10px;
+    background-color: #302f2f;
+}
+
+.services li a {
+    color:#FFFFFF;
+    text-decoration:none;
+    padding:10px;
+    display:block;
+}
+.services li a:hover {
+    padding:10px;
+    font-weight:bold;
+    color: var(--sel);
+}
+
+
+
+
+
+.listServices {
+    margin-top: 100px;
+}
+
+.lsItem {
+    border: 1px solid #474747;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 800px;
+    height: 85px;
+    display: flex;
+    padding: 10px;
+}
+
+.lsDesc {
+    width: 800px;
+    color: white;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.lsDesc p {
+    font-size: 14px;
+}
+
+.lsItem:hover .lsDesc{
+    color: var(--sel);
+}
