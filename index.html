@@ -10,13 +10,16 @@
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <img src="images/logo.png" alt="ClusterStorm" class="logo">
+                <div class="logo">
+                    <img src="images/logow.png" alt="ClusterStorm">
+                    <p>ClusterStorm</p>
+                </div>
                 <ul class="menu">
-                    <li class="active">
-                        <a href="#">Главная</a>
+                    <li class="active" id="header_section_main">
+                        <a href="" onclick="showSection('section_main');return false;">Главная</a>
                     </li>
-                    <li>
-                        <a href="projects.html">Проекты</a>
+                    <li id="header_section_projects">
+                        <a href="projects.html" onclick="showSection('section_projects');return false;">Проекты</a>
                     </li>
                     <!-- <li class="servicesMenu">
                         <a href="services.html">Сервисы</a>
@@ -29,7 +32,7 @@
                     
                 </div>
             </nav>
-            <div class="desc">
+            <div class="desc hideable_section" id="section_main">
                 <div class="sect">
                     <h1>Кто я?</h1>
                     Трудно представить ту вычислительную мощность, которая бы понадобилась мне, чтобы суметь что-то о себе написать. <br>
@@ -43,31 +46,13 @@
                     Возможно, я начну работать в какой-то другой сфере программирования, но как показывает практика, любые мои попытки приказывают долго жить.
                     Исключение составляет web-разработка, хотя учитывая то, что вы сейчас видите, это утверждение довольно спорное.
                 </div>
-                <hr>
                 <div class="sect">
-                    <ol class="faq-list">
-                        <li>
-                            Сколько тебе лет?
-                            <p>Мне <span id="age"></span>.</p>
-                        </li>
-                        <li>
-                            Как давно занимаешься программированием?
-                            <p>С 2015 года.</p>
-                        </li>
-                        <li>
-                            Как ты всё это изучил?
-                            <p>Сначала смотрел различные видео на YouTube, параллельно пытаясь делать что-то самому. Затем просто искал в гугле то, что меня интересует.</p>
-                        </li>
-                        <li>
-                            Почему этот сайт темный?
-                            <p><strike><span style="opacity: 0.3">Потому что светлая тема для геев.</span></strike> [осуждаю]</p>
-                        </li>
-                    </ol>
+                    Если вы хотите узнать больше, то<span id="inst"> можете посетить мой <span href="#" class="instagram">инстаграм</span>.</span>
                 </div>
-                <hr>
-                <div class="sect">
-                    <h1>Вам этого мало?</h1>
-                    Что ж, если я вас интересую как человек и вы хотите больше узнать обо мне лично, то<span id="inst"> можете посетить мой <span href="#" class="instagram">инстаграм</span>.</span>
+            </div>
+            <div class="listServices hideable_section hidden" id="section_projects">
+                <div class="lsItem">
+                    <p style="opacity: 0.5; text-align: center">Простите, но я бездарность, не способная сотворить ничего. Приходите позже, возможно что-то появится (нет).</p>
                 </div>
             </div>
         </div>
@@ -76,5 +61,63 @@
     <br><br><br><br><br>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+
+        var current_section = 'section_main';
+        var loading = false;
+        function showSection(id) {
+            if(loading) return;
+            if(!$('#' + id).hasClass('hidden')) return;
+            
+            var _this = $('#' + id);
+            var _current = $('#' + current_section);
+                _current.addClass('hideable_animation');
+                
+
+            _trh('#' + current_section, 'translateY(80px)');
+
+            $('#header_' + current_section).removeClass('active');
+            var temp = $('#header_' + id).find('a');
+            temp.css('color', 'var(--sel)');
+
+            loading = true;
+            setTimeout(function () {
+                $('#' + current_section).addClass('hidden');
+
+                _this.css('transform', 'translateY(-80px)');
+                _this.css('opacity', '0');
+                _this.removeClass('hidden');
+                _this.addClass('hideable_animation');
+
+                if(current_section == 'section_main') restoreInstagram();
+
+                setTimeout(() => {
+                    _trs('#' + id);
+                    $('#header_' + id).addClass('active');
+                    temp.css('color', '');
+
+                    setTimeout(() => {
+                        loading = false;
+                        _current.removeClass('hideable_animation');
+                        _this.removeClass('hideable_animation');
+                        current_section = id;
+                    }, 500);
+                }, 100);
+
+                
+            }, 500);
+        }
+
+
+        function _trh(e, t) {
+            if(t != null) $(e).css('transform', t);
+            $(e).css('opacity', '0');
+        }
+
+        function _trs(e) {
+            $(e).css('transform', '');
+            $(e).css('opacity', '1');
+        }
+    </script>
 </body>
 </html>

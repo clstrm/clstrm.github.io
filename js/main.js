@@ -52,20 +52,15 @@ var birth = new Date(1999, 4, 4, 5, 45, 0); // 04.05.1999 18:20
 
 
 $(function () {
-    $('.instagram').click(function () {
-        document.getElementById('inst').innerHTML = '... серьезно, оно вам надо?';
+    $('.sect').on('click', '.instagram', function () {
+        $('#inst').html('... серьёзно, оно вам надо?');
     });
 
     $(".servicesMenu").hover(function () {
         $(this).find('ul').slideToggle('fast');
     });
-
-    var age = document.getElementById('age');
-    function curUpdate() {
-        var diff = new Date() - birth;
-        age.innerHTML = formatDate(new Date(diff));
-    }
-    
-    curUpdate();
-    setInterval(curUpdate, 10000);
 });
+
+function restoreInstagram() {
+    $('#inst').html(' можете посетить мой <span href="#" class="instagram">инстаграм</span>.');
+}

@@ -2,6 +2,17 @@
     --sel: #6bff3d;
 }
 
+@font-face {
+    font-family: "OCR A Extended";
+    src: url("../fonts/ocraext.eot");
+    src: url("../fonts/ocraext.eot?#iefix") format("embedded-opentype"), 
+        url("../fonts/ocraext.woff2") format("woff2"), 
+        url("../fonts/ocraext.woff") format("woff"), 
+        url("../fonts/ocraext.ttf") format("truetype"), 
+        url("../fonts/ocraext.svg#OCR A Extended") format("svg"); }
+
+
+
 body {
     background: #000;
     color: #fff;
@@ -51,9 +62,32 @@ ul, ul li {
     margin-top: 42px;
 }
 
+
+.nav .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav .logo img {
+    width: 64px;
+}
+
+.nav .logo p {
+    font-family: 'OCR A Extended';
+    font-size: 46px;
+    text-transform: uppercase;
+    font-weight: bold;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    color: #c7c7c7;
+}
+
+
 .menu {
     display: flex;
-    margin-left: 20px;
+    margin-left: 35px;
 }
 
 .menu li {
@@ -64,6 +98,9 @@ ul, ul li {
 .menu li a {
     color: #fff;
     padding: 12px 0;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    transition: all 0.5s ease;
 }
 
 .menu li.active a {
@@ -186,8 +223,6 @@ ul, ul li {
 
 
 
-
-
 .listServices {
     margin-top: 100px;
 }
@@ -215,4 +250,13 @@ ul, ul li {
 
 .lsItem:hover .lsDesc{
     color: var(--sel);
+}
+
+
+.hidden {
+    display: none;
+}
+
+.hideable_animation {
+    transition: 0.5s;
 }
