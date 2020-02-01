@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClusterStorm</title>
+    <link rel="stylesheet" href="css/main.css?v=3">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <div class="logo">
+                <img src="images/logow.png" alt="ClusterStorm">
+                <p>ClusterStorm</p>
+            </div>
+            <ul class="menu">
+                <li>
+                    <a href="./">Главная</a>
+                </li>
+                <li>
+                    <a href="projects.html">Проекты</a>
+                </li>
+                <li class="active">
+                    <a href="projects.html">Обратная связь</a>
+                </li>
+            </ul>
+            <div class="right">
+                
+            </div>
+        </nav>
+        <div class="desc">
+            <div class="feedback">
+                <form action="https://cdn.clusterstorm.org/feedback/send.php" onsubmit="sendFeedback(); return false;" id="feedbackForm">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" placeholder="" required>
+                
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="" required>
+                
+                
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" name="message" placeholder="" style="height:200px" required></textarea>
+                
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div class="formLoading hidden">
+                <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+            <div class="formResult hidden">
+                <p id="formResultMessage"></p>
+                <p id="formResultMessageInfo"></p>
+                <p id="formResultMessageCredentials"></p>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br><br>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/main.js?v=3"></script>
+</body>
+</html>

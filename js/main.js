@@ -1,3 +1,52 @@
+
+
+
+
+function sendFeedback() {
+    $('.feedback').addClass('hidden');
+    $('.formLoading').removeClass('hidden');
+    setTimeout(() => {
+        $('.formLoading').addClass('hidden');
+        $('.formResult').removeClass('hidden');
+    }, 1000);
+
+    $.ajax({
+        type: 'POST',
+        url: $("#feedbackForm").attr("action"),
+        data: $("#feedbackForm").serialize(), 
+        success: function(response) {
+            $('#formResultMessage').css('color', 'green');
+            $('#formResultMessage').html('Сообщение отправлено');
+            $('#formResultMessageInfo').html(document.getElementById('message').value);
+            $('#formResultMessageCredentials').html(document.getElementById('name').value + ' (' + document.getElementById('email').value + ')')
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $('#formResultMessage').css('color', 'red');
+            $('#formResultMessage').html('Не удалось отправить сообщение');
+            $('#formResultMessageInfo').html(document.getElementById('message').value);
+            $('#formResultMessageCredentials').html(document.getElementById('name').value + ' (' + document.getElementById('email').value + ')')
+        }
+      });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function strdisp(val, one, two, five) {
     var x = val % 100;
     if(x >= 11 && x <= 19) return five;
