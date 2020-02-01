@@ -1,6 +1,18 @@
 
 
+function messageSent() {
+    $('#formResultMessage').css('color', 'green');
+    $('#formResultMessage').html('Сообщение отправлено');
+    $('#formResultMessageInfo').html(document.getElementById('message').value);
+    $('#formResultMessageCredentials').html(document.getElementById('name').value + ' (' + document.getElementById('email').value + ')');
+}
 
+function messageError() {
+    $('#formResultMessage').css('color', 'red');
+    $('#formResultMessage').html('Не удалось отправить сообщение');
+    $('#formResultMessageInfo').html(document.getElementById('message').value);
+    $('#formResultMessageCredentials').html(document.getElementById('name').value + ' (' + document.getElementById('email').value + ')');
+}
 
 function sendFeedback() {
     $('.feedback').addClass('hidden');
@@ -15,16 +27,13 @@ function sendFeedback() {
         url: $("#feedbackForm").attr("action"),
         data: $("#feedbackForm").serialize(), 
         success: function(response) {
-            $('#formResultMessage').css('color', 'green');
-            $('#formResultMessage').html('Сообщение отправлено');
-            $('#formResultMessageInfo').html(document.getElementById('message').value);
-            $('#formResultMessageCredentials').html(document.getElementById('name').value + ' (' + document.getElementById('email').value + ')')
+            console.log(response);
+            if(response.status) messageSent();
+            else messageError();
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            $('#formResultMessage').css('color', 'red');
-            $('#formResultMessage').html('Не удалось отправить сообщение');
-            $('#formResultMessageInfo').html(document.getElementById('message').value);
-            $('#formResultMessageCredentials').html(document.getElementById('name').value + ' (' + document.getElementById('email').value + ')')
+            console.log(xhr);
+            messageError();
         }
       });
 }
