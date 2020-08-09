@@ -1,4 +1,130 @@
+Number.prototype.map = function (in_min, in_max, out_min, out_max) {
+    var mapped = (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    if(out_min < out_max) {
+        if(mapped > out_max) return out_max;
+        if(mapped < out_min) return out_min;
+    } else {
+        if(mapped < out_max) return out_max;
+        if(mapped > out_min) return out_min;
+    }
 
+    return mapped;
+}
+
+function getScroll() {
+    var scr = document.body.scrollTop;
+    if(scr == 0) return document.documentElement.scrollTop;
+    return scr;
+}
+
+window.onresize = function() {
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    console.log('W: ' + width);
+}
+
+
+
+function logoLoad() {
+    $('header img').css('opacity', '1');
+
+    var bigPictureLogo = Math.min(500, (window.innerWidth > 0) ? window.innerWidth : screen.width);
+
+    $('header img').css('width', bigPictureLogo+'px');
+    $('header img').css('transform', 'translate(0, 100px)');
+    setTimeout(function() {
+        $('header img').css('transform', 'translate(0, 0)');
+        $('header img').css('width', '65px');
+        setTimeout(function() {
+            if(getScroll() > 0) {
+                $('.cs_main_wrapper').css('transition', 'none');
+                scrollFunction();
+                $('header').css('transition', 'none');
+                $('header h1').css('opacity', 1);
+                window.onscroll = function() {scrollFunction()};
+                $('.cs_main_wrapper').css('opacity', 1);
+                $('.cs_section_hr').css('opacity', 1);
+                setTimeout(function() {
+                    $('header img').css('transition', 'none');
+                    $('header h1').css('transition', 'none');
+                }, 800);
+                return;
+            }
+            $('.cs_main_wrapper').css('opacity', 1);
+            $('.cs_section_hr').css('opacity', 1);
+            $('header h1').css('opacity', 1);
+            $('header').css('background', 'linear-gradient(90deg, rgba(74,91,103,0.5) 0%, rgba(34,88,103,0.5) 35%, rgba(74,91,103,0.5) 100%)');
+            window.onscroll = function() {scrollFunction()};
+            $('header').css('transition', 'none');
+            $('header img').css('transition', 'none');
+            $('header h1').css('transition', 'none');
+            scrollFunction();
+        }, 1000);
+    }, 400);
+}
+
+
+
+function scrollFunction() {
+    var scroll = getScroll();
+
+    
+    var limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, 
+        document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );
+
+
+    var scroll_max = limit - window.innerHeight;
+
+    var factor = Math.min(Math.max(scroll_max, 10), 160); // 160
+    if(factor == 0) factor = 160;
+
+    var header_height = scroll.map(0, factor, 160, 53);
+
+    var header_alpha = scroll.map(0, factor, 0.5, 1);
+
+
+    $('header').css('height', header_height + 'px')
+    .css('background', 'linear-gradient(90deg, rgba(74,91,103,'+header_alpha+') 0%, rgba(34,88,103,'+header_alpha+') 35%, rgba(74,91,103,'+header_alpha+') 100%)');
+
+    var img = scroll.map(0, factor, 0, -154);
+
+    var h1_x = scroll.map(0, factor, 0, 25);
+    var h1_y = scroll.map(0, factor, 0, -43);
+
+    $('header img').css('transform', 'translate('+img+'px, 0)');
+    $('header h1').css('transform', 'translate('+h1_x+'px, '+h1_y+'px)');
+    
+    var h1_font = scroll.map(0, factor, 48, 40);
+    var img_w = scroll.map(0, factor, 65, 40);
+
+    $('.cs_logo h1').css('font-size', h1_font+'px');
+    $('.cs_logo img').css('width', img_w+'px');
+
+    var logopad = scroll.map(0, factor, 20, 5);
+
+    $('.cs_logo').css('padding-top', logopad+'px');
+
+}
+
+function restoreInstagram() {
+    $('#cs_inst').html(' можете посетить мой <span class="cs_instagram">инстаграм</span>.');
+}
+
+var page_loading = false;
+
+function openPage(page) {
+    page_loading = true;
+    $('.cs_main_content').fadeOut(200);
+    setTimeout(function() {
+        restoreAll();
+        $('#cs_page_' + page).fadeIn(200);
+        page_loading = false;
+    }, 200);
+}
+
+function restoreAll() {
+    restoreInstagram();
+    restoreFeedback();
+}
 
 function messageSent() {
     $('#formResultMessage').css('color', 'green');
@@ -14,14 +140,30 @@ function messageError() {
     $('#formResultMessageCredentials').html(document.getElementById('name').value + ' (' + document.getElementById('email').value + ')');
 }
 
-function sendFeedback() {
-    $('.feedback').addClass('hidden');
-    $('.formLoading').removeClass('hidden');
-    setTimeout(() => {
-        $('.formLoading').addClass('hidden');
-        $('.formResult').removeClass('hidden');
-    }, 1000);
+function restoreFeedback() {
+    $('.feedback input[type=submit]').prop("disabled", false);
+    $('.feedback form').removeClass('unvisible');
+    $('.formLoading').addClass('hidden');
+    $('.formResult').addClass('hidden');
+    $('#formResultMessageCredentials').addClass('hidden');
+    $('.feedback input[type=text]').val('');
+    $('.feedback input[type=email]').val('');
+    $('.feedback textarea').val('');
+}
 
+function showFeedbackResponse() {
+    $('.formLoading').addClass('hidden');
+    $('.formResult').removeClass('hidden');
+    $('#formResultMessageCredentials').removeClass('hidden');
+    page_loading = false;
+}
+
+function sendFeedback() {
+    page_loading = true;
+    $('.feedback input[type=submit]').prop("disabled", true);
+    $('.feedback form').addClass('unvisible');
+    $('.formLoading').removeClass('hidden');
+    
     $.ajax({
         type: 'POST',
         url: $("#feedbackForm").attr("action"),
@@ -30,95 +172,43 @@ function sendFeedback() {
             console.log(response);
             if(response.status) messageSent();
             else messageError();
+            showFeedbackResponse();
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr);
             messageError();
+            showFeedbackResponse();
         }
       });
 }
 
 
+$(document).ready(function() {
+    logoLoad();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function strdisp(val, one, two, five) {
-    var x = val % 100;
-    if(x >= 11 && x <= 19) return five;
-    x = x % 10;
-    if(x >= 2 && x <= 4) return two;
-    if(x == 0 || (x >= 5 && x <= 9)) return five;
-    return one;
-}
-
-function formatDate(date) {
-    var begin = new Date(0);
-
-    var day = date.getDate() - begin.getDate();
-    var mon = date.getMonth() - begin.getMonth();
-    var year = date.getFullYear() - begin.getFullYear();
-
-    var h = date.getHours() - begin.getHours();
-    var m = date.getMinutes() - begin.getMinutes();
-    var s = date.getSeconds() - begin.getSeconds();
-
-    var res = '';
-    if(year > 0) {
-        res += year + ' ' + strdisp(year, 'год', 'года', 'лет') + ' ';
-    }
-
-    if(mon > 0) {
-        res += mon + ' ' + strdisp(mon, 'месяц', 'месяца', 'месяцев') + ' ';
-    }
-
-    if(day > 0) {
-        res += day + ' ' + strdisp(day, 'день', 'дня', 'дней') + ' ';
-    }
-
-    if(h > 0) {
-        res += h + ' ' + strdisp(h, 'час', 'часа', 'часов') + ' ';
-    }
-
-    if(m > 0) {
-        res += m + ' ' + strdisp(m, 'минута', 'минуты', 'минут') + ' ';
-    }
-
-    if(s > 0) {
-        //res += s + ' ' + strdisp(s, 'секунда', 'секунды', 'секунд') + ' ';
-    }
-
-    return res.trim();
-}
-
-var birth = new Date(1999, 4, 4, 5, 45, 0); // 04.05.1999 18:20
-
-
-
-
-$(function () {
-    $('.sect').on('click', '.instagram', function () {
-        $('#inst').html('... серьёзно, оно вам надо?');
+    $('.cs_main_wrapper nav a').on('click', function(e) {
+        e.preventDefault();
+        if(page_loading) return;
+        if($(this).hasClass('cs_nav_selected')) return;
+        $('.cs_main_wrapper nav a').removeClass('cs_nav_selected');
+        $(this).addClass('cs_nav_selected');
+        openPage($(this).attr('data-page'));
     });
 
-    $(".servicesMenu").hover(function () {
-        $(this).find('ul').slideToggle('fast');
+    $('.cs_sect').on('click', '.cs_instagram', function () {
+        $('#cs_inst').html('... серьёзно, оно вам надо?');
     });
 });
 
-function restoreInstagram() {
-    $('#inst').html(' можете посетить мой <span href="#" class="instagram">инстаграм</span>.');
-}
+
+// img          transform: translate(-187px, 0);
+
+// h1               transform: translate(25px, -65px);
+
+// header div       padding-top: 5px;
+
+// header           height: 92px;
+//                  background: linear-gradient(90deg, rgba(74,91,103,1) 0%, rgba(34,88,103,1) 35%, rgba(74,91,103,1) 100%);
+
+// .cs_section_hr_top  margin-top: 160px -> 92px

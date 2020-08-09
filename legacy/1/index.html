@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClusterStorm</title>
+    <link rel="stylesheet" href="css/main.css?v=3">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <div class="logo">
+                <img src="images/logow.png" alt="ClusterStorm">
+                <p>ClusterStorm</p>
+            </div>
+            <ul class="menu">
+                <li class="active" id="header_section_main">
+                    <a href="" onclick="showSection('section_main');return false;">Главная</a>
+                </li>
+                <li id="header_section_projects">
+                    <a href="projects.html" onclick="showSection('section_projects');return false;">Проекты</a>
+                </li>
+                <li id="header_section_feedback">
+                    <a href="feedback.html" onclick="showSection('section_feedback');return false;">Обратная связь</a>
+                </li>
+            </ul>
+            <div class="right">
+                
+            </div>
+        </nav>
+        <div class="desc hideable_section" id="section_main">
+            <div class="sect">
+                <h1>Кто я?</h1>
+                Я всего лишь бездушная машина, транслирующая чужие идеи в программный код.<br>
+                Меня зовут <strong>Андрей</strong>. И если бы я был известен, то известен я был бы под ником <strong>ClusterStorm</strong>. 
+            </div>
+            <hr>
+            <div class="sect">
+                <h1>Чем я занимаюсь?</h1>
+                На этот вопрос, думаю, не сможет ответить никто. Однако, есть надежда, что когда-нибудь плоды моих трудов появятся здесь. <br>
+                Забегая наперед, скажу, что моя деятельность по большей части связана с игрой Minecraft и программированием на Java.
+                Возможно, я начну работать в какой-то другой сфере программирования, но, как показывает практика, любые мои попытки приказывают долго жить.
+                Исключение составляет web-разработка, хотя учитывая то, что вы сейчас видите, это утверждение довольно спорное.
+            </div>
+            <div class="sect">
+                Если вы хотите узнать больше, то<span id="inst"> можете посетить мой <span href="#" class="instagram">инстаграм</span>.</span>
+            </div>
+        </div>
+        <div class="listServices hideable_section hidden" id="section_projects">
+            <div class="lsItem">
+                <p style="opacity: 0.5; text-align: center">Приходите позже, возможно что-то появится.</p>
+            </div>
+        </div>
+        <div class="desc hideable_section hidden" id="section_feedback">
+            <div class="feedback">
+                <form action="https://cdn.clusterstorm.org/feedback/send.php" onsubmit="sendFeedback(); return false;" id="feedbackForm">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" placeholder="" required>
+                
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="" required>
+                
+                
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" name="message" placeholder="" style="height:200px" required></textarea>
+                
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div class="formLoading hidden">
+                <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+            <div class="formResult hidden">
+                <p id="formResultMessage"></p>
+                <p id="formResultMessageInfo"></p>
+                <p id="formResultMessageCredentials"></p>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br><br>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/main.js?v=3"></script>
+    <script>
+
+        var current_section = 'section_main';
+        var loading = false;
+        function showSection(id) {
+            if(loading) return;
+            if(!$('#' + id).hasClass('hidden')) return;
+            
+            var _this = $('#' + id);
+            var _current = $('#' + current_section);
+                _current.addClass('hideable_animation');
+                
+
+            _trh('#' + current_section, 'translateY(80px)');
+
+            $('#header_' + current_section).removeClass('active');
+            var temp = $('#header_' + id).find('a');
+            temp.css('color', 'var(--sel)');
+
+            loading = true;
+            setTimeout(function () {
+                $('#' + current_section).addClass('hidden');
+
+                _this.css('transform', 'translateY(-80px)');
+                _this.css('opacity', '0');
+                _this.removeClass('hidden');
+                _this.addClass('hideable_animation');
+
+                if(current_section == 'section_main') restoreInstagram();
+
+                setTimeout(() => {
+                    _trs('#' + id);
+                    $('#header_' + id).addClass('active');
+                    temp.css('color', '');
+
+                    setTimeout(() => {
+                        loading = false;
+                        _current.removeClass('hideable_animation');
+                        _this.removeClass('hideable_animation');
+                        current_section = id;
+                    }, 500);
+                }, 100);
+
+                
+            }, 500);
+        }
+
+
+        function _trh(e, t) {
+            if(t != null) $(e).css('transform', t);
+            $(e).css('opacity', '0');
+        }
+
+        function _trs(e) {
+            $(e).css('transform', '');
+            $(e).css('opacity', '1');
+        }
+    </script>
+</body>
+</html>

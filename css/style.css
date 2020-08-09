@@ -1,0 +1,280 @@
+@font-face {
+    font-family: 'OcraExt';
+    src: url('fonts/ocraext.ttf') format('truetype');
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #282A34;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #282A34;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #425555;
+}
+
+html {
+    overflow-y:scroll;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-width: 320px;
+    font-size: 14px;
+    font-family: Segoe UI, sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../img/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header {
+    height: 160px;
+    background: rgb(74,91,103);
+    background: linear-gradient(90deg, rgba(74,91,103,0.5) 0%, rgba(34,88,103,0.5) 35%, rgba(74,91,103,0.5) 100%);
+
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+}
+
+header .cs_logo {
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+
+    align-items: center;
+    -webkit-align-items: center;
+	-webkit-box-align: center;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+
+    padding-top: 20px;
+}
+
+header h1 {
+    font-family: 'OcraExt';
+    color: #a0d0d0;
+    font-size: 48px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0;
+    user-select: none;
+}
+
+.cs_section_hr {
+    width: 100%;
+    height: 3px;
+    margin: 0;
+    background: #306d7e;
+}
+
+.cs_section_hr_top {
+    position: absolute;
+    bottom: 0;
+    padding: 0;
+}
+
+.cs_main_wrapper {
+    margin-top: 160px;
+}
+
+.cs_main_wrapper nav {
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+}
+
+.cs_main_wrapper nav a {
+    width: 200px;
+    height: 40px;
+    border: 2px solid #356472;
+    display: block;
+    margin: 24px 26px;
+    background-color: rgba(11, 34, 51, 0.6);
+    color: #a0d0d0;
+    text-decoration: none;
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 4px;
+    transition: all 0.3s;
+}
+
+.cs_main_wrapper nav a:hover {
+    border: 2px solid #7be0f9;
+    background-color: rgba(11, 34, 51, 0.9);
+}
+
+.cs_main_wrapper nav .cs_nav_selected {
+    color: #7be0f9;
+}
+
+
+.cs_main {
+    background: rgba(0, 0, 0, 0.5);
+    width: 85%;
+    min-height: calc(100vh - 160px - 96px - 60px - 24px - 30px);
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+
+.cs_main_content {
+    margin: 0 20px;
+    font-size: 18px;
+}
+
+.cs_sect {
+    margin-top: 20px;
+}
+
+.cs_main h1,h2,h3 {
+    color: white;
+}
+.cs_main p {
+    color: white;
+    margin: 0;
+}
+
+
+.cs_instagram {
+    color: #eb29ad;
+    cursor: pointer;
+}
+
+.lsItem {
+    border: 1px solid #474747;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 800px;
+    height: 65px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.lsItem p {
+    opacity: 0.5;
+    text-align: center;
+}
+
+.feedback form {
+    padding-bottom: 20px;
+}
+
+.feedback label {
+    color: white;
+}
+
+.feedback input[type=text], .feedback input[type=email], .feedback select, .feedback textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #356472;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    outline: none;
+    background: rgba(11, 34, 51, 0.6);
+    color: white;
+}
+
+
+.feedback input[type=submit] {
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: rgba(11, 34, 51, 0.6);
+    transition: 0.3s;
+
+    margin: 0 auto;
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    font-size: 16px;
+}
+
+.feedback input[type=submit]:hover {
+    background: #7be0f9;
+}
+
+
+.lds-roller{display:inline-block;position:relative;width:80px;height:80px}.lds-roller div{animation:lds-roller 1.2s cubic-bezier(.5,0,.5,1) infinite;transform-origin:40px 40px}.lds-roller div:after{content:" ";display:block;position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;margin:-4px 0 0 -4px}.lds-roller div:nth-child(1){animation-delay:-36ms}.lds-roller div:nth-child(1):after{top:63px;left:63px}.lds-roller div:nth-child(2){animation-delay:-72ms}.lds-roller div:nth-child(2):after{top:68px;left:56px}.lds-roller div:nth-child(3){animation-delay:-108ms}.lds-roller div:nth-child(3):after{top:71px;left:48px}.lds-roller div:nth-child(4){animation-delay:-144ms}.lds-roller div:nth-child(4):after{top:72px;left:40px}.lds-roller div:nth-child(5){animation-delay:-.18s}.lds-roller div:nth-child(5):after{top:71px;left:32px}.lds-roller div:nth-child(6){animation-delay:-216ms}.lds-roller div:nth-child(6):after{top:68px;left:24px}.lds-roller div:nth-child(7){animation-delay:-252ms}.lds-roller div:nth-child(7):after{top:63px;left:17px}.lds-roller div:nth-child(8){animation-delay:-288ms}.lds-roller div:nth-child(8):after{top:56px;left:12px}@keyframes lds-roller{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+.feedback {
+    position: relative;
+}
+
+.formLoading {
+    top: 0;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-top: 150px;
+}
+
+.formResult {
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+#formResultMessage {
+    text-align: center;
+}
+
+#formResultMessageInfo {
+    text-align: justify;
+}
+
+#formResultMessageCredentials {
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.unvisible {
+    visibility: hidden;
+}
+
+footer {
+    height: 60px;
+}

@@ -1,0 +1,43 @@
+@media only screen and (max-width: 1300px) {
+    .cs_main {
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .lsItem {
+        width: 90%;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .cs_main_wrapper nav a {
+        margin: 17px 13px;
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+    .cs_main_wrapper nav a {
+        font-size: 21px;
+        height: 30px;
+    }
+}
+
+
+@media only screen and (max-width: 360px) {
+    .cs_main_wrapper nav {
+        flex-direction: column;
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        align-items: center;
+        -webkit-align-items: center;
+    }
+    .cs_main_wrapper nav a {
+        margin: 8px 0;
+    }
+    .cs_main_wrapper nav a:first-of-type {
+        margin-top: 18px;
+    }
+}
