@@ -27,10 +27,10 @@ window.onresize = function() {
 function logoLoad() {
     $('header img').css('opacity', '1');
 
-    var bigPictureLogo = Math.min(500, (window.innerWidth > 0) ? window.innerWidth : screen.width);
+    //var bigPictureLogo = Math.min(500, (window.innerWidth > 0) ? window.innerWidth : screen.width);
 
-    $('header img').css('width', bigPictureLogo+'px');
-    $('header img').css('transform', 'translate(0, 100px)');
+    //$('header img').css('width', bigPictureLogo+'px');
+    //$('header img').css('transform', 'translate(0, 100px)');
     setTimeout(function() {
         $('header img').css('transform', 'translate(0, 0)');
         $('header img').css('width', '65px');
