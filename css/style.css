@@ -98,6 +98,7 @@ header h1 {
 
 .cs_main_wrapper {
     margin-top: 160px;
+    padding-bottom: 12px;
 }
 
 .cs_main_wrapper nav {
@@ -138,7 +139,7 @@ header h1 {
 .cs_main {
     background: rgba(0, 0, 0, 0.5);
     width: 85%;
-    min-height: calc(100vh - 160px - 96px - 60px - 24px - 30px);
+    min-height: calc(100vh - 160px - 96px - 60px - 24px - 30px - 12px);
     margin: 0 auto;
     border-radius: 20px;
     margin-bottom: 24px;
@@ -277,4 +278,25 @@ header h1 {
 
 footer {
     height: 60px;
+    display: flex;
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+	-webkit-box-align: center;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+
+}
+
+.f_copyright {
+    text-align: center;
+    margin: 0;
+    color: rgb(202, 202, 202);
+    font-size: 16px;
 }

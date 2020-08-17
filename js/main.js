@@ -25,6 +25,14 @@ window.onresize = function() {
 
 
 function logoLoad() {
+    var moved = false;
+    var scroll = getScroll() != 0;
+    if(((window.innerWidth > 0) ? window.innerWidth : screen.width) <= 750) {
+        $('header img').css('transition', 'none');
+        $('header img').css('transform', 'translate(0, 0)');
+        $('header img').css('width', '65px');
+        moved = true;
+    }
     $('header img').css('opacity', '1');
 
     //var bigPictureLogo = Math.min(500, (window.innerWidth > 0) ? window.innerWidth : screen.width);
@@ -32,10 +40,13 @@ function logoLoad() {
     //$('header img').css('width', bigPictureLogo+'px');
     //$('header img').css('transform', 'translate(0, 100px)');
     setTimeout(function() {
-        $('header img').css('transform', 'translate(0, 0)');
-        $('header img').css('width', '65px');
+        if(!moved) {
+            $('header img').css('transform', 'translate(0, 0)');
+            $('header img').css('width', '65px');
+        }
         setTimeout(function() {
             if(getScroll() > 0) {
+                $('header img').css('transition', '1s');
                 $('.cs_main_wrapper').css('transition', 'none');
                 scrollFunction();
                 $('header').css('transition', 'none');
@@ -43,23 +54,25 @@ function logoLoad() {
                 window.onscroll = function() {scrollFunction()};
                 $('.cs_main_wrapper').css('opacity', 1);
                 $('.cs_section_hr').css('opacity', 1);
+                $('footer').css('opacity', 1);
                 setTimeout(function() {
                     $('header img').css('transition', 'none');
                     $('header h1').css('transition', 'none');
-                }, 800);
+                }, (scroll ? 1000 : 800));
                 return;
             }
             $('.cs_main_wrapper').css('opacity', 1);
             $('.cs_section_hr').css('opacity', 1);
             $('header h1').css('opacity', 1);
+            $('footer').css('opacity', 1);
             $('header').css('background', 'linear-gradient(90deg, rgba(74,91,103,0.5) 0%, rgba(34,88,103,0.5) 35%, rgba(74,91,103,0.5) 100%)');
             window.onscroll = function() {scrollFunction()};
             $('header').css('transition', 'none');
             $('header img').css('transition', 'none');
             $('header h1').css('transition', 'none');
             scrollFunction();
-        }, 1000);
-    }, 400);
+        }, moved ? 190 : 1000);
+    }, moved ? 10 : 400);
 }
 
 
