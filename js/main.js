@@ -73,6 +73,12 @@ function logoLoad() {
             scrollFunction();
         }, moved ? 190 : 1000);
     }, moved ? 10 : 400);
+
+
+    var requestedSection = _GET('t');
+
+    if(requestedSection == 'projects') changePage('projects');
+    else if(requestedSection == 'contacts') changePage('contacts');
 }
 
 
@@ -123,6 +129,15 @@ function restoreInstagram() {
 }
 
 var page_loading = false;
+
+function changePage(page) {
+    var _nav = $('.cs_main_wrapper nav a[data-page=' + page + ']');
+    
+    if(_nav.hasClass('cs_nav_selected')) return;
+    $('.cs_main_wrapper nav a').removeClass('cs_nav_selected');
+    _nav.addClass('cs_nav_selected');
+    openPage(page);
+}
 
 function openPage(page) {
     page_loading = true;
@@ -196,6 +211,8 @@ function sendFeedback() {
 }
 
 
+
+
 $(document).ready(function() {
     logoLoad();
 
@@ -203,16 +220,26 @@ $(document).ready(function() {
     $('.cs_main_wrapper nav a').on('click', function(e) {
         e.preventDefault();
         if(page_loading) return;
-        if($(this).hasClass('cs_nav_selected')) return;
-        $('.cs_main_wrapper nav a').removeClass('cs_nav_selected');
-        $(this).addClass('cs_nav_selected');
-        openPage($(this).attr('data-page'));
+
+        var page = $(this).attr('data-page');
+
+        window.history.replaceState({}, document.title, window.location.href.split('?')[0] + (page == 'main' ? "" : "?t=" + page));
+
+        changePage(page);
     });
 
     $('.cs_sect').on('click', '.cs_instagram', function () {
         $('#cs_inst').html('... серьёзно, оно вам надо?');
     });
 });
+
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+function _GET(param) {
+    return urlParams.get(param);
+}
 
 
 // img          transform: translate(-187px, 0);
